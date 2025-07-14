@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  <meta name='admaven-placement' content=BqdU7rdnG>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZenScape - Relaxing Visuals & Sounds</title>
@@ -48,8 +47,9 @@
       margin-bottom: 1rem;
     }
 
-    /* Interstitial Ad Overlay */
-    .interstitial-overlay {
+    /* Interstitial Ad Overlay (AdMaven will typically inject its own overlay) */
+    .interstitial-overlay-simulated {
+      /* Renamed to avoid conflict with AdMaven's potential styles */
       position: fixed;
       top: 0;
       left: 0;
@@ -65,12 +65,13 @@
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    .interstitial-overlay.show {
+    .interstitial-overlay-simulated.show {
       opacity: 1;
       visibility: visible;
     }
 
-    .interstitial-content {
+    .interstitial-content-simulated {
+      /* Renamed to avoid conflict */
       background-color: #1a202c;
       /* Dark background for ad content */
       color: white;
@@ -84,7 +85,8 @@
       position: relative;
     }
 
-    .interstitial-close {
+    .interstitial-close-simulated {
+      /* Renamed to avoid conflict */
       position: absolute;
       top: 1rem;
       right: 1rem;
@@ -98,10 +100,24 @@
       transition: background-color 0.2s ease;
     }
 
-    .interstitial-close:hover {
+    .interstitial-close-simulated:hover {
       background-color: rgba(255, 255, 255, 0.2);
     }
   </style>
+
+  <!-- AdMaven Popunder Ad Script -->
+  <script data-cfasync="false" type="text/javascript"
+    src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
+  <!-- Note: The above script is a common AdMaven popunder format. Replace with your exact script if it differs. -->
+
+  <!-- AdMaven Push Notification Ad Script -->
+  <!-- IMPORTANT: For Push Notifications to work, you MUST download the 'service-worker.js' file from AdMaven
+         and place it in the ROOT directory of your GitHub Pages repository.
+         This script below only registers that service worker. -->
+  <script data-cfasync="false" type="text/javascript"
+    src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
+  <!-- Note: The above script is a common AdMaven push notification format. Replace with your exact script if it differs. -->
+
 </head>
 
 <body class="bg-gray-900 text-white min-h-screen flex flex-col justify-between items-center relative">
@@ -130,28 +146,25 @@
         </button>
       </div>
 
-      <!-- AdMaven Native Ad Placeholder 1 -->
+      <!-- AdMaven Native Ad Placeholder 1 (2 Click Push Banner) -->
       <div class="ad-placeholder rounded-lg mb-8">
-        <p>AdMaven Native Ad Zone 1 (e.g., "Recommended Relaxing Content")</p>
-        <!-- Place your AdMaven Native Ad Code here -->
-        <img src="https://placehold.co/300x100/1abc9c/ffffff?text=Native+Ad+1" alt="Native Ad Placeholder"
-          class="mx-auto mt-2 rounded-md"
-          onerror="this.onerror=null;this.src='https://placehold.co/300x100/cccccc/000000?text=Image+Error';">
+        <p>AdMaven Native Ad Zone 1 (2 Click Push Banner)</p>
+        <!-- Your 2 Click Push (Banner) AdMaven Code -->
+        <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199739"></script>
       </div>
 
-      <!-- AdMaven Native Ad Placeholder 2 -->
+      <!-- AdMaven Native Ad Placeholder 2 (LightBox) -->
       <div class="ad-placeholder rounded-lg mb-8">
-        <p>AdMaven Native Ad Zone 2 (e.g., "Curated Wellness Offers")</p>
-        <!-- Place your AdMaven Native Ad Code here -->
-        <img src="https://placehold.co/300x100/3498db/ffffff?text=Native+Ad+2" alt="Native Ad Placeholder"
-          class="mx-auto mt-2 rounded-md"
-          onerror="this.onerror=null;this.src='https://placehold.co/300x100/cccccc/000000?text=Image+Error';">
+        <p>AdMaven Native Ad Zone 2 (LightBox)</p>
+        <!-- Your LightBox AdMaven Code -->
+        <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199740"></script>
       </div>
 
-      <!-- AdMaven Native Ad Placeholder 3 -->
+      <!-- AdMaven Native Ad Placeholder 3 (Generic - add your own if you have more) -->
       <div class="ad-placeholder rounded-lg">
-        <p>AdMaven Native Ad Zone 3 (e.g., "Partners & Supporters")</p>
-        <!-- Place your AdMaven Native Ad Code here -->
+        <p>AdMaven Native Ad Zone 3 (Generic Native Ad)</p>
+        <!-- If you have another Native AdMaven script, place it here.
+                     Otherwise, this will just show the placeholder text. -->
         <img src="https://placehold.co/300x100/9b59b6/ffffff?text=Native+Ad+3" alt="Native Ad Placeholder"
           class="mx-auto mt-2 rounded-md"
           onerror="this.onerror=null;this.src='https://placehold.co/300x100/cccccc/000000?text=Image+Error';">
@@ -166,21 +179,21 @@
     </p>
   </footer>
 
-  <!-- AdMaven In-Page Push Ad Placeholder (Floating Banner) -->
-  <!-- This would typically be a small, floating element. AdMaven provides its own script for this. -->
+  <!-- AdMaven In-Page Push Ad Script (Floating Banner) -->
   <div class="fixed bottom-4 right-4 bg-blue-700 text-white p-3 rounded-lg shadow-xl text-xs z-20 hidden md:block">
     <p>AdMaven In-Page Push Ad</p>
-    <p class="text-gray-300"> (Simulated Floating Ad)</p>
-    <!-- Place your AdMaven In-Page Push Ad Code here -->
+    <!-- Your In Page Push AdMaven Code -->
+    <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199738"></script>
   </div>
 
-  <!-- Interstitial Ad Overlay (Simulated) -->
-  <div id="interstitialOverlay" class="interstitial-overlay">
-    <div class="interstitial-content">
-      <button id="interstitialCloseBtn" class="interstitial-close">&times;</button>
+  <!-- Interstitial Ad Overlay (Simulated for demonstration, AdMaven will inject its own) -->
+  <!-- This div is kept for the JS logic to trigger a 'show' event, but AdMaven's script will handle the actual display. -->
+  <div id="interstitialOverlaySimulated" class="interstitial-overlay-simulated">
+    <div class="interstitial-content-simulated">
+      <button id="interstitialCloseBtnSimulated" class="interstitial-close-simulated">&times;</button>
       <h2 class="text-2xl font-bold mb-4">A Moment of Reflection</h2>
-      <p class="mb-4">This is a simulated Interstitial Ad. In a real scenario, a full-screen advertisement from AdMaven
-        would appear here.</p>
+      <p class="mb-4">This is a simulated Interstitial Ad overlay. In a real scenario, AdMaven's full-screen
+        advertisement would appear here.</p>
       <img src="https://placehold.co/400x300/e74c3c/ffffff?text=Interstitial+Ad" alt="Interstitial Ad Placeholder"
         class="mx-auto my-4 rounded-md"
         onerror="this.onerror=null;this.src='https://placehold.co/400x300/cccccc/000000?text=Image+Error';">
@@ -188,75 +201,49 @@
     </div>
   </div>
 
+  <!-- AdMaven Interstitial Ad Script -->
+  <script data-cfasync="false" type="text/javascript"
+    src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
+  <!-- Note: The above script is a common AdMaven interstitial format. Replace with your exact script if it differs. -->
+
+
   <script>
     // --- AdMaven Integration & Simulation Logic ---
 
-    // IMPORTANT: Replace these comments with your actual AdMaven ad codes.
-    // AdMaven typically provides JavaScript snippets for each ad format.
+    // The AdMaven scripts for Popunder, Push, and Interstitial are now directly in the HTML <head> and <body>.
+    // Their display is handled by AdMaven's own JavaScript.
+    // We will keep the triggers in our JS to simulate user interaction points that AdMaven expects.
 
-    /*
-    // AdMaven Popunder Ad Code (Example - usually placed in head or body)
-    (function() {
-        var script = document.createElement('script');
-        script.src = '//your-admaven-popunder-script.js'; // REPLACE WITH ACTUAL ADMAVEN SCRIPT URL
-        document.head.appendChild(script);
-    })();
-    */
+    // For Interstitial, AdMaven's script will typically show the ad when its function is called or on certain events.
+    // We'll use a placeholder function `triggerAdMavenInterstitial()` that you'd replace if AdMaven provides a specific JS function call.
+    // Otherwise, AdMaven's script might automatically detect page changes/scrolls if configured that way.
+    // For now, the simulated overlay will still appear to confirm the trigger points are working.
 
-    /*
-    // AdMaven Push Notification Ad Code (Example - usually placed in head or body)
-    (function() {
-        var script = document.createElement('script');
-        script.src = '//your-admaven-push-script.js'; // REPLACE WITH ACTUAL ADMAVEN SCRIPT URL
-        document.head.appendChild(script);
-    })();
-    */
-
-    // --- Simulated Ad Logic ---
-
-    let popunderTriggered = false;
-    let interstitialTriggerCount = 0;
-    const interstitialOverlay = document.getElementById('interstitialOverlay');
-    const interstitialCloseBtn = document.getElementById('interstitialCloseBtn');
-
-    // Function to simulate Popunder Ad
-    function triggerPopunder() {
-      if (!popunderTriggered) {
-        // In a real scenario, AdMaven's script would open a new tab/window.
-        // For simulation, we'll just log it and set a flag.
-        console.log('Simulating AdMaven Popunder Ad!');
-        // window.open('https://example.com/ad-page', '_blank'); // Uncomment for actual new tab
-        popunderTriggered = true;
-      }
-    }
-
-    // Function to show simulated Interstitial Ad
-    function showInterstitial() {
-      if (interstitialOverlay) {
-        interstitialOverlay.classList.add('show');
-        // Auto-hide after a few seconds, or wait for close button
+    function triggerAdMavenInterstitial() {
+      // In a real scenario, you might call a specific AdMaven function here if they provide one, e.g.:
+      // AdMaven.showInterstitial(1199736); // This is just an example, check AdMaven's docs.
+      console.log('AdMaven Interstitial Triggered (simulated overlay shown)');
+      // Show the simulated overlay to confirm the trigger is active
+      const interstitialOverlaySimulated = document.getElementById('interstitialOverlaySimulated');
+      if (interstitialOverlaySimulated) {
+        interstitialOverlaySimulated.classList.add('show');
         setTimeout(() => {
-          hideInterstitial();
-        }, 5000); // Ad shown for 5 seconds
+          interstitialOverlaySimulated.classList.remove('show');
+        }, 5000); // Simulated ad shown for 5 seconds
       }
     }
 
-    // Function to hide simulated Interstitial Ad
-    function hideInterstitial() {
-      if (interstitialOverlay) {
-        interstitialOverlay.classList.remove('show');
-      }
+    // Event listener for closing simulated interstitial
+    const interstitialCloseBtnSimulated = document.getElementById('interstitialCloseBtnSimulated');
+    if (interstitialCloseBtnSimulated) {
+      interstitialCloseBtnSimulated.addEventListener('click', () => {
+        const interstitialOverlaySimulated = document.getElementById('interstitialOverlaySimulated');
+        if (interstitialOverlaySimulated) {
+          interstitialOverlaySimulated.classList.remove('show');
+        }
+      });
     }
 
-    // Event listener for closing interstitial
-    if (interstitialCloseBtn) {
-      interstitialCloseBtn.addEventListener('click', hideInterstitial);
-    }
-
-    // Trigger popunder on first user interaction (e.g., any click)
-    document.addEventListener('click', () => {
-      triggerPopunder();
-    }, { once: true }); // Ensures it only runs once
 
     // --- Website Content & Interaction Logic ---
 
@@ -273,16 +260,17 @@
     ];
     let currentSceneIndex = 0;
     let soundOn = false; // Simulate sound state
+    let sceneChangeCount = 0;
 
     function updateScene() {
       currentSceneIndex = (currentSceneIndex + 1) % scenes.length;
       zenBackground.src = scenes[currentSceneIndex].img;
       zenQuote.textContent = scenes[currentSceneIndex].quote;
 
-      // Trigger Interstitial Ad on scene change (simulated "navigation")
-      interstitialTriggerCount++;
-      if (interstitialTriggerCount % 2 === 0) { // Trigger every 2nd scene change
-        showInterstitial();
+      sceneChangeCount++;
+      // Trigger Interstitial Ad on every 2nd scene change (simulated "navigation")
+      if (sceneChangeCount % 2 === 0) {
+        triggerAdMavenInterstitial();
       }
     }
 
@@ -295,7 +283,6 @@
         soundOn = !soundOn;
         toggleSoundBtn.textContent = soundOn ? 'Sound On' : 'Toggle Sound';
         console.log(`Sound is now: ${soundOn ? 'On' : 'Off'}`);
-        // In a real app, you'd play/pause an audio element here.
       });
     }
 
@@ -312,10 +299,9 @@
       }, refreshInterval);
     }
 
-    // --- Scroll Trigger for Interstitial (Simulated) ---
+    // --- Scroll Trigger for Interstitial ---
     let scrollTriggeredInterstitial = false;
     window.addEventListener('scroll', () => {
-      // Calculate scroll percentage
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = document.documentElement.scrollTop;
       const scrollPercentage = (scrolled / scrollHeight) * 100;
@@ -323,7 +309,7 @@
       // Trigger interstitial if scrolled past 50% and not already triggered for this session
       if (scrollPercentage > 50 && !scrollTriggeredInterstitial) {
         console.log('Simulating Interstitial Ad due to scroll!');
-        showInterstitial();
+        triggerAdMavenInterstitial();
         scrollTriggeredInterstitial = true; // Set flag to prevent repeated triggers
       }
     });
@@ -331,8 +317,11 @@
     // Initialize auto-refresh when the page loads
     window.onload = setAutoRefresh;
 
-    // Ensure the interstitial is hidden on load
-    hideInterstitial();
+    // Ensure the simulated interstitial overlay is hidden on load
+    const interstitialOverlaySimulated = document.getElementById('interstitialOverlaySimulated');
+    if (interstitialOverlaySimulated) {
+      interstitialOverlaySimulated.classList.remove('show');
+    }
 
   </script>
 </body>
