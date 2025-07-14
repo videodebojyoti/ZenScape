@@ -186,21 +186,6 @@
     <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199738"></script>
   </div>
 
-  <!-- Interstitial Ad Overlay (Simulated for demonstration, AdMaven will inject its own) -->
-  <!-- This div is kept for the JS logic to trigger a 'show' event, but AdMaven's script will handle the actual display. -->
-  <div id="interstitialOverlaySimulated" class="interstitial-overlay-simulated">
-    <div class="interstitial-content-simulated">
-      <button id="interstitialCloseBtnSimulated" class="interstitial-close-simulated">&times;</button>
-      <h2 class="text-2xl font-bold mb-4">A Moment of Reflection</h2>
-      <p class="mb-4">This is a simulated Interstitial Ad overlay. In a real scenario, AdMaven's full-screen
-        advertisement would appear here.</p>
-      <img src="https://placehold.co/400x300/e74c3c/ffffff?text=Interstitial+Ad" alt="Interstitial Ad Placeholder"
-        class="mx-auto my-4 rounded-md"
-        onerror="this.onerror=null;this.src='https://placehold.co/400x300/cccccc/000000?text=Image+Error';">
-      <p class="text-sm text-gray-400">Content will resume shortly...</p>
-    </div>
-  </div>
-
   <!-- AdMaven Interstitial Ad Script -->
   <script data-cfasync="false" type="text/javascript"
     src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
@@ -208,42 +193,21 @@
 
 
   <script>
-    // --- AdMaven Integration & Simulation Logic ---
-
-    // The AdMaven scripts for Popunder, Push, and Interstitial are now directly in the HTML <head> and <body>.
-    // Their display is handled by AdMaven's own JavaScript.
-    // We will keep the triggers in our JS to simulate user interaction points that AdMaven expects.
+    // --- AdMaven Integration Logic ---
 
     // For Interstitial, AdMaven's script will typically show the ad when its function is called or on certain events.
-    // We'll use a placeholder function `triggerAdMavenInterstitial()` that you'd replace if AdMaven provides a specific JS function call.
-    // Otherwise, AdMaven's script might automatically detect page changes/scrolls if configured that way.
-    // For now, the simulated overlay will still appear to confirm the trigger points are working.
+    // If AdMaven provides a JS API, call it here. Otherwise, the ad may show automatically on page load or navigation.
 
     function triggerAdMavenInterstitial() {
-      // In a real scenario, you might call a specific AdMaven function here if they provide one, e.g.:
-      // AdMaven.showInterstitial(1199736); // This is just an example, check AdMaven's docs.
-      console.log('AdMaven Interstitial Triggered (simulated overlay shown)');
-      // Show the simulated overlay to confirm the trigger is active
-      const interstitialOverlaySimulated = document.getElementById('interstitialOverlaySimulated');
-      if (interstitialOverlaySimulated) {
-        interstitialOverlaySimulated.classList.add('show');
-        setTimeout(() => {
-          interstitialOverlaySimulated.classList.remove('show');
-        }, 5000); // Simulated ad shown for 5 seconds
+      // Try to call AdMaven's interstitial trigger if available
+      if (window.AdMaven && typeof window.AdMaven.showInterstitial === 'function') {
+        // Replace 1199736 with your actual interstitial zone ID if needed
+        window.AdMaven.showInterstitial(1199736);
+      } else {
+        // If AdMaven does not provide a JS API, the ad will show automatically if configured
+        console.log('AdMaven Interstitial Trigger attempted, but no API found.');
       }
     }
-
-    // Event listener for closing simulated interstitial
-    const interstitialCloseBtnSimulated = document.getElementById('interstitialCloseBtnSimulated');
-    if (interstitialCloseBtnSimulated) {
-      interstitialCloseBtnSimulated.addEventListener('click', () => {
-        const interstitialOverlaySimulated = document.getElementById('interstitialOverlaySimulated');
-        if (interstitialOverlaySimulated) {
-          interstitialOverlaySimulated.classList.remove('show');
-        }
-      });
-    }
-
 
     // --- Website Content & Interaction Logic ---
 
@@ -268,7 +232,7 @@
       zenQuote.textContent = scenes[currentSceneIndex].quote;
 
       sceneChangeCount++;
-      // Trigger Interstitial Ad on every 2nd scene change (simulated "navigation")
+      // Trigger Interstitial Ad on every 2nd scene change
       if (sceneChangeCount % 2 === 0) {
         triggerAdMavenInterstitial();
       }
@@ -308,7 +272,7 @@
 
       // Trigger interstitial if scrolled past 50% and not already triggered for this session
       if (scrollPercentage > 50 && !scrollTriggeredInterstitial) {
-        console.log('Simulating Interstitial Ad due to scroll!');
+        console.log('Triggering AdMaven Interstitial Ad due to scroll!');
         triggerAdMavenInterstitial();
         scrollTriggeredInterstitial = true; // Set flag to prevent repeated triggers
       }
@@ -316,12 +280,6 @@
 
     // Initialize auto-refresh when the page loads
     window.onload = setAutoRefresh;
-
-    // Ensure the simulated interstitial overlay is hidden on load
-    const interstitialOverlaySimulated = document.getElementById('interstitialOverlaySimulated');
-    if (interstitialOverlaySimulated) {
-      interstitialOverlaySimulated.classList.remove('show');
-    }
 
   </script>
 </body>
