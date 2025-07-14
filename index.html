@@ -1,287 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZenScape - Relaxing Visuals & Sounds</title>
-  <!-- Tailwind CSS CDN for utility classes -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts - Inter for clean typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    /* Custom styles for ZenScape */
-    body {
-      font-family: 'Inter', sans-serif;
-      overflow: hidden;
-      /* Prevent scrollbars unless content overflows intentionally */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenScape - Relaxing Visuals & Sounds</title>
+    <!-- Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for clean typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for ZenScape */
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrollbars unless content overflows intentionally */
+        }
+        .zen-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Send to background */
+            filter: brightness(0.7); /* Slightly dim background for text readability */
+        }
+        .content-overlay {
+            background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
+            backdrop-filter: blur(5px); /* Subtle blur effect */
+        }
+        .ad-placeholder {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8em;
+            text-align: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        /* No more custom styles for simulated interstitial overlay */
+    </style>
 
-    .zen-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      /* Send to background */
-      filter: brightness(0.7);
-      /* Slightly dim background for text readability */
-    }
+    <!-- AdMaven Popunder Ad Script (Placement ID: 1199734) -->
+    <script data-cfasync="false" type="text/javascript" src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
 
-    .content-overlay {
-      background-color: rgba(0, 0, 0, 0.4);
-      /* Semi-transparent dark overlay */
-      backdrop-filter: blur(5px);
-      /* Subtle blur effect */
-    }
-
-    .ad-placeholder {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px dashed rgba(255, 255, 255, 0.3);
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.8em;
-      text-align: center;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    /* Interstitial Ad Overlay (AdMaven will typically inject its own overlay) */
-    .interstitial-overlay-simulated {
-      /* Renamed to avoid conflict with AdMaven's potential styles */
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .interstitial-overlay-simulated.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .interstitial-content-simulated {
-      /* Renamed to avoid conflict */
-      background-color: #1a202c;
-      /* Dark background for ad content */
-      color: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      text-align: center;
-      max-width: 90%;
-      max-height: 90%;
-      overflow: auto;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
-
-    .interstitial-close-simulated {
-      /* Renamed to avoid conflict */
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: 50%;
-      transition: background-color 0.2s ease;
-    }
-
-    .interstitial-close-simulated:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-  </style>
-
-  <!-- AdMaven Popunder Ad Script -->
-  <script data-cfasync="false" type="text/javascript"
-    src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
-  <!-- Note: The above script is a common AdMaven popunder format. Replace with your exact script if it differs. -->
-
-  <!-- AdMaven Push Notification Ad Script -->
-  <!-- IMPORTANT: For Push Notifications to work, you MUST download the 'service-worker.js' file from AdMaven
+    <!-- AdMaven Push Notification Ad Script -->
+    <!-- IMPORTANT: For Push Notifications to work, you MUST download the 'service-worker.js' file from AdMaven
          and place it in the ROOT directory of your GitHub Pages repository.
          This script below only registers that service worker. -->
-  <script data-cfasync="false" type="text/javascript"
-    src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
-  <!-- Note: The above script is a common AdMaven push notification format. Replace with your exact script if it differs. -->
+    <script data-cfasync="false" type="text/javascript" src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
+
+    <!-- AdMaven Interstitial Ad Script (Placement ID: 1199736) -->
+    <script data-cfasync="false" type="text/javascript" src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
 
 </head>
-
 <body class="bg-gray-900 text-white min-h-screen flex flex-col justify-between items-center relative">
 
-  <!-- ZenScape Background Visual -->
-  <img id="zenBackground" class="zen-background"
-    src="https://placehold.co/1920x1080/2c3e50/ecf0f1?text=Calming+Nature+Scene" alt="Calming Background"
-    onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/000000?text=Image+Error';">
+    <!-- ZenScape Background Visual -->
+    <img id="zenBackground" class="zen-background" src="https://placehold.co/1920x1080/2c3e50/ecf0f1?text=Calming+Nature+Scene" alt="Calming Background" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/cccccc/000000?text=Image+Error';">
 
-  <!-- Main Content Area -->
-  <main class="flex-grow flex flex-col justify-center items-center p-4 sm:p-8 w-full max-w-4xl z-10">
-    <div class="content-overlay p-6 sm:p-10 rounded-xl shadow-2xl text-center max-w-full">
-      <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-teal-300">ZenScape</h1>
-      <p id="zenQuote" class="text-lg sm:text-xl leading-relaxed text-gray-200 mb-6">
-        "In every walk with nature one receives far more than he seeks."
-      </p>
+    <!-- Main Content Area -->
+    <main class="flex-grow flex flex-col justify-center items-center p-4 sm:p-8 w-full max-w-4xl z-10">
+        <div class="content-overlay p-6 sm:p-10 rounded-xl shadow-2xl text-center max-w-full">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-teal-300">ZenScape</h1>
+            <p id="zenQuote" class="text-lg sm:text-xl leading-relaxed text-gray-200 mb-6">
+                "In every walk with nature one receives far more than he seeks."
+            </p>
 
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <button id="nextSceneBtn"
-          class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-          Next Scene
-        </button>
-        <button id="toggleSoundBtn"
-          class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-          Toggle Sound
-        </button>
-      </div>
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button id="nextSceneBtn" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                    Next Scene
+                </button>
+                <button id="toggleSoundBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                    Toggle Sound
+                </button>
+            </div>
 
-      <!-- AdMaven Native Ad Placeholder 1 (2 Click Push Banner) -->
-      <div class="ad-placeholder rounded-lg mb-8">
-        <p>AdMaven Native Ad Zone 1 (2 Click Push Banner)</p>
-        <!-- Your 2 Click Push (Banner) AdMaven Code -->
-        <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199739"></script>
-      </div>
+            <!-- AdMaven Native Ad Placeholder 1 (2 Click Push Banner - Placement ID: 1199739) -->
+            <div class="ad-placeholder rounded-lg mb-8">
+                <!-- Your 2 Click Push (Banner) AdMaven Code -->
+                <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199739"></script>
+            </div>
 
-      <!-- AdMaven Native Ad Placeholder 2 (LightBox) -->
-      <div class="ad-placeholder rounded-lg mb-8">
-        <p>AdMaven Native Ad Zone 2 (LightBox)</p>
-        <!-- Your LightBox AdMaven Code -->
-        <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199740"></script>
-      </div>
+            <!-- AdMaven Native Ad Placeholder 2 (LightBox - Placement ID: 1199740) -->
+            <div class="ad-placeholder rounded-lg mb-8">
+                <!-- Your LightBox AdMaven Code -->
+                <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199740"></script>
+            </div>
 
-      <!-- AdMaven Native Ad Placeholder 3 (Generic - add your own if you have more) -->
-      <div class="ad-placeholder rounded-lg">
-        <p>AdMaven Native Ad Zone 3 (Generic Native Ad)</p>
-        <!-- If you have another Native AdMaven script, place it here.
-                     Otherwise, this will just show the placeholder text. -->
-        <img src="https://placehold.co/300x100/9b59b6/ffffff?text=Native+Ad+3" alt="Native Ad Placeholder"
-          class="mx-auto mt-2 rounded-md"
-          onerror="this.onerror=null;this.src='https://placehold.co/300x100/cccccc/000000?text=Image+Error';">
-      </div>
+            <!-- AdMaven Native Ad Placeholder 3 (Removed as no specific ID was provided for it) -->
 
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-4 bg-gray-800 bg-opacity-70 text-gray-400 text-sm z-10 rounded-t-lg">
+        <p>&copy; 2025 ZenScape. All rights reserved. | <a href="#" class="hover:underline text-teal-400">Privacy Policy</a></p>
+    </footer>
+
+    <!-- AdMaven In-Page Push Ad Script (Floating Banner - Placement ID: 1199738) -->
+    <div class="fixed bottom-4 right-4 bg-blue-700 text-white p-3 rounded-lg shadow-xl text-xs z-20 hidden md:block">
+        <!-- Your In Page Push AdMaven Code -->
+        <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199738"></script>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="w-full text-center py-4 bg-gray-800 bg-opacity-70 text-gray-400 text-sm z-10 rounded-t-lg">
-    <p>&copy; 2025 ZenScape. All rights reserved. | <a href="#" class="hover:underline text-teal-400">Privacy Policy</a>
-    </p>
-  </footer>
+    <script>
+        // --- AdMaven Integration & Trigger Logic ---
 
-  <!-- AdMaven In-Page Push Ad Script (Floating Banner) -->
-  <div class="fixed bottom-4 right-4 bg-blue-700 text-white p-3 rounded-lg shadow-xl text-xs z-20 hidden md:block">
-    <p>AdMaven In-Page Push Ad</p>
-    <!-- Your In Page Push AdMaven Code -->
-    <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1199738"></script>
-  </div>
+        // The AdMaven scripts for Popunder, Push, and Interstitial are now directly in the HTML <head> and <body>.
+        // Their display is handled by AdMaven's own JavaScript based on their internal logic and your configuration.
+        // We will keep the trigger points in our JS to simulate user interaction that AdMaven might react to.
 
-  <!-- AdMaven Interstitial Ad Script -->
-  <script data-cfasync="false" type="text/javascript"
-    src="//pl240356.highperforminggate.com/0f/f2/31/0ff231b51e048997c653372c3d100000.js"></script>
-  <!-- Note: The above script is a common AdMaven interstitial format. Replace with your exact script if it differs. -->
+        function triggerAdMavenInterstitial() {
+            // This function is called at specific user interaction points.
+            // AdMaven's interstitial script (loaded in the <head>) should handle the actual ad display.
+            // We're just logging here to confirm the trigger points are being hit.
+            console.log('AdMaven Interstitial Triggered (check browser for ad display)');
+        }
 
+        // --- Website Content & Interaction Logic ---
 
-  <script>
-    // --- AdMaven Integration Logic ---
+        const zenBackground = document.getElementById('zenBackground');
+        const zenQuote = document.getElementById('zenQuote');
+        const nextSceneBtn = document.getElementById('nextSceneBtn');
+        const toggleSoundBtn = document.getElementById('toggleSoundBtn');
 
-    // For Interstitial, AdMaven's script will typically show the ad when its function is called or on certain events.
-    // If AdMaven provides a JS API, call it here. Otherwise, the ad may show automatically on page load or navigation.
+        const scenes = [
+            { img: 'https://placehold.co/1920x1080/2c3e50/ecf0f1?text=Calming+Nature+Scene', quote: "In every walk with nature one receives far more than he seeks." },
+            { img: 'https://placehold.co/1920x1080/1a202c/a0aec0?text=Peaceful+Mountain+View', quote: "The mountains are calling and I must go." },
+            { img: 'https://placehold.co/1920x1080/34495e/e0e0e0?text=Tranquil+Forest+Path', quote: "Look deep into nature, and then you will understand everything better." },
+            { img: 'https://placehold.co/1920x1080/2980b9/ffffff?text=Serene+Ocean+Waves', quote: "The ocean stirs the heart, inspires the imagination and brings eternal joy to the soul." }
+        ];
+        let currentSceneIndex = 0;
+        let soundOn = false; // Simulate sound state
+        let sceneChangeCount = 0;
 
-    function triggerAdMavenInterstitial() {
-      // Try to call AdMaven's interstitial trigger if available
-      if (window.AdMaven && typeof window.AdMaven.showInterstitial === 'function') {
-        // Replace 1199736 with your actual interstitial zone ID if needed
-        window.AdMaven.showInterstitial(1199736);
-      } else {
-        // If AdMaven does not provide a JS API, the ad will show automatically if configured
-        console.log('AdMaven Interstitial Trigger attempted, but no API found.');
-      }
-    }
+        function updateScene() {
+            currentSceneIndex = (currentSceneIndex + 1) % scenes.length;
+            zenBackground.src = scenes[currentSceneIndex].img;
+            zenQuote.textContent = scenes[currentSceneIndex].quote;
 
-    // --- Website Content & Interaction Logic ---
+            sceneChangeCount++;
+            // Trigger Interstitial Ad on every 2nd scene change (simulated "navigation")
+            if (sceneChangeCount % 2 === 0) {
+                triggerAdMavenInterstitial();
+            }
+        }
 
-    const zenBackground = document.getElementById('zenBackground');
-    const zenQuote = document.getElementById('zenQuote');
-    const nextSceneBtn = document.getElementById('nextSceneBtn');
-    const toggleSoundBtn = document.getElementById('toggleSoundBtn');
+        if (nextSceneBtn) {
+            nextSceneBtn.addEventListener('click', updateScene);
+        }
 
-    const scenes = [
-      { img: 'https://placehold.co/1920x1080/2c3e50/ecf0f1?text=Calming+Nature+Scene', quote: "In every walk with nature one receives far more than he seeks." },
-      { img: 'https://placehold.co/1920x1080/1a202c/a0aec0?text=Peaceful+Mountain+View', quote: "The mountains are calling and I must go." },
-      { img: 'https://placehold.co/1920x1080/34495e/e0e0e0?text=Tranquil+Forest+Path', quote: "Look deep into nature, and then you will understand everything better." },
-      { img: 'https://placehold.co/1920x1080/2980b9/ffffff?text=Serene+Ocean+Waves', quote: "The ocean stirs the heart, inspires the imagination and brings eternal joy to the soul." }
-    ];
-    let currentSceneIndex = 0;
-    let soundOn = false; // Simulate sound state
-    let sceneChangeCount = 0;
+        if (toggleSoundBtn) {
+            toggleSoundBtn.addEventListener('click', () => {
+                soundOn = !soundOn;
+                toggleSoundBtn.textContent = soundOn ? 'Sound On' : 'Toggle Sound';
+                console.log(`Sound is now: ${soundOn ? 'On' : 'Off'}`);
+            });
+        }
 
-    function updateScene() {
-      currentSceneIndex = (currentSceneIndex + 1) % scenes.length;
-      zenBackground.src = scenes[currentSceneIndex].img;
-      zenQuote.textContent = scenes[currentSceneIndex].quote;
+        // --- Auto-Refresh Logic ---
+        function setAutoRefresh() {
+            // Random interval between 2.5 minutes (150,000 ms) and 3 minutes (180,000 ms)
+            const minRefresh = 150 * 1000;
+            const maxRefresh = 180 * 1000;
+            const refreshInterval = Math.floor(Math.random() * (maxRefresh - minRefresh + 1)) + minRefresh;
 
-      sceneChangeCount++;
-      // Trigger Interstitial Ad on every 2nd scene change
-      if (sceneChangeCount % 2 === 0) {
-        triggerAdMavenInterstitial();
-      }
-    }
+            console.log(`Next auto-refresh in ${refreshInterval / 1000} seconds.`);
+            setTimeout(() => {
+                location.reload(); // Reload the page to simulate new session/impressions
+            }, refreshInterval);
+        }
 
-    if (nextSceneBtn) {
-      nextSceneBtn.addEventListener('click', updateScene);
-    }
+        // --- Scroll Trigger for Interstitial ---
+        let scrollTriggeredInterstitial = false;
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = document.documentElement.scrollTop;
+            const scrollPercentage = (scrolled / scrollHeight) * 100;
 
-    if (toggleSoundBtn) {
-      toggleSoundBtn.addEventListener('click', () => {
-        soundOn = !soundOn;
-        toggleSoundBtn.textContent = soundOn ? 'Sound On' : 'Toggle Sound';
-        console.log(`Sound is now: ${soundOn ? 'On' : 'Off'}`);
-      });
-    }
+            // Trigger interstitial if scrolled past 50% and not already triggered for this session
+            if (scrollPercentage > 50 && !scrollTriggeredInterstitial) {
+                console.log('Simulating Interstitial Ad due to scroll!');
+                triggerAdMavenInterstitial();
+                scrollTriggeredInterstitial = true; // Set flag to prevent repeated triggers
+            }
+        });
 
-    // --- Auto-Refresh Logic ---
-    function setAutoRefresh() {
-      // Random interval between 2.5 minutes (150,000 ms) and 3 minutes (180,000 ms)
-      const minRefresh = 150 * 1000;
-      const maxRefresh = 180 * 1000;
-      const refreshInterval = Math.floor(Math.random() * (maxRefresh - minRefresh + 1)) + minRefresh;
+        // Initialize auto-refresh when the page loads
+        window.onload = setAutoRefresh;
 
-      console.log(`Next auto-refresh in ${refreshInterval / 1000} seconds.`);
-      setTimeout(() => {
-        location.reload(); // Reload the page to simulate new session/impressions
-      }, refreshInterval);
-    }
-
-    // --- Scroll Trigger for Interstitial ---
-    let scrollTriggeredInterstitial = false;
-    window.addEventListener('scroll', () => {
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = document.documentElement.scrollTop;
-      const scrollPercentage = (scrolled / scrollHeight) * 100;
-
-      // Trigger interstitial if scrolled past 50% and not already triggered for this session
-      if (scrollPercentage > 50 && !scrollTriggeredInterstitial) {
-        console.log('Triggering AdMaven Interstitial Ad due to scroll!');
-        triggerAdMavenInterstitial();
-        scrollTriggeredInterstitial = true; // Set flag to prevent repeated triggers
-      }
-    });
-
-    // Initialize auto-refresh when the page loads
-    window.onload = setAutoRefresh;
-
-  </script>
+    </script>
 </body>
-
 </html>
